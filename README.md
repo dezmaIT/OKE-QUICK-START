@@ -84,8 +84,15 @@ terraform apply -var-file="terraform.tfvars"
 
 ```
 
+8. Access your Cluster from the Operator
 
-7. #<b>Optional</b> </br>
+```
+ssh -o ProxyCommand='ssh -W %h:%p -i <path-to-private-key> opc@<bastion_public_ip>' -i <path-to-private-key> opc@<operator_ip>
+
+```
+
+
+9. #<b>Optional</b> </br>
 
 Clean up all resources if need be
 
