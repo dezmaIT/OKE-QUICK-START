@@ -1,3 +1,10 @@
+terraform {
+   backend "http" 
+   {
+      address = ${{vars.TERRAFORM_STATE_FILE}}
+      update_method = "PUT"
+    }      
+}
 module "oke" {
   source  = "oracle-terraform-modules/oke/oci"
   version = "5.1.5"
@@ -10,7 +17,6 @@ module "oke" {
   compartment_id      = var.compartment_id
   ssh_public_key      = var.ssh_public_key
   ssh_private_key_path = var.ssh_private_key_path
-  
    
   
  
@@ -37,8 +43,8 @@ module "oke" {
   bastion_image_os_version    = "8"            
   bastion_image_type          = "platform"
   bastion_shape = {
-  shape            = "VM.Standard.A2.Flex",
-  ocpus            = 1,
+  shape            = "VM.Standard.E4.Flex",
+  ocpus            = 2,
   memory           = 4,
   boot_volume_size = 50
   }
@@ -54,8 +60,8 @@ module "oke" {
   operator_image_os_version      = "8"            
   operator_image_type            = "platform"
   operator_shape = {
-  shape            = "VM.Standard.A2.Flex",
-  ocpus            = 1,
+  shape            = "VM.Standard.E4.Flex",
+  ocpus            = 2,
   memory           = 4,
   boot_volume_size = 50
   }
@@ -73,12 +79,12 @@ module "oke" {
   worker_pools = {
   
   np1 = {
-    shape              = "VM.Standard.A2.Flex",
+    shape              = "VM.Standard.E4.Flex",
     ocpus              = 2,
     memory             = 8,
     size               = 1,
     boot_volume_size   = 50,
-    kubernetes_version = "v1.32.1"
+	
   }
   
 
