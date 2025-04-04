@@ -1,10 +1,3 @@
-terraform {
-   backend "http" 
-   {
-      address = ${{vars.TERRAFORM_STATE_FILE}}
-      update_method = "PUT"
-    }      
-}
 module "oke" {
   source  = "oracle-terraform-modules/oke/oci"
   version = "5.1.5"
